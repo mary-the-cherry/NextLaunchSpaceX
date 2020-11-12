@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Next Space X Launch
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Purpose
 
-## Available Scripts
+To learn React funcionalities:
+- Fetch data in React with async/await
+- Using reusable Render Prop Components
+- Using the Slick react Lib
 
-In the project directory, you can run:
+## The APP
 
-### `npm start`
+Single side Api which:
+- shows the next Space X Launch
+- shows all upcoming and past space x launches in a carousel
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Funcionality:
+- Button to decide if you see all past or all upcoming launches
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Component Overview
 
-### `npm test`
+- FetchData: Component to fetch data from a api (Render Prop Component)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+	Input: URL:string
+	Output: error:error, isLoading:boolean, data:fetched data
 
-### `npm run build`
+       --> while fetching data Component returns the status is Loading
+       --> if no fetching is possible Component returns an error  
+       --> returns fetched data to its children
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Filter: Component to Filter the Launches (Past or Upcoming Launches)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+	Input: active:boolean, filterUpcoming:boolean, filtername:string, setFilterUpcoming (to change state in App.js)
+	
+	--> creats a filter button whichs changes state in App.js on click
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- LaunchOverview: Component to initialize Slick Carousel and create datalist for carousel
 
-### `npm run eject`
+	Input: data:fetched json data (created from FetchData), filterUpcoming: boolean 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- NextLaunch: create Card with next Launch data
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+	Input: data: fetched json data (created from FetchData), loaded: boolean (created from FetchData)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+	--> while loading component a payload overview is created
+	-->created card with data of next launch incl. a card deck of the payloads of the rocket
+	--> calls the component Payload for each payload in payloadList 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Launch: component called from LaunchOverview for each Launch and creates a card with this data
 
-## Learn More
+	Input: mission_name:string, date_utc:string,site_name:string
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+	
+- Payload: component called from NextLaunch for each payload of this launch and creats a card for this payload
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+	Input: payload_id: string, payload_type: string, payload_customer: string, payload_nationality:string
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Online Version
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+https://never-miss-a-space-x-launch.netlify.app/

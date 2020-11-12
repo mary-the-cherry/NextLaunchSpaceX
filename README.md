@@ -9,7 +9,7 @@ To learn React funcionalities:
 
 ## The APP
 
-Single side Api which:
+Single page App which:
 - shows the next Space X Launch
 - shows all upcoming and past space x launches in a carousel
 
